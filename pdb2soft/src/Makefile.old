@@ -1,0 +1,17 @@
+
+include config.sgi
+
+SOURCES = main.c 
+OBJECTS = $(SOURCES:.c=.o)
+
+pdb2soft: $(OBJECTS)
+	cc -o $@ $(OBJECTS) $(LDFLAGS) 
+	rcp $@ smallchaos:bin
+
+clean:
+	rm $(OBJECTS) pdb2soft core
+
+depend:
+	makedepend $(SOURCES)
+
+# DO NOT DELETE

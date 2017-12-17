@@ -1,0 +1,368 @@
+#!/bin/sh
+#start up wish interpreter\
+exec wish "$0" "$@"
+
+if { [info exists env(SIM_TCL)] } {
+	set path $env(SIM_TCL)
+} else {
+	set path "/usr/local/sim/tcl"
+}
+
+if { [catch {source $path/filedialog.tcl}] } {
+	puts "I can't load tcl sources."
+	puts "Try to set SIM_TCL environment variable to the correct path."
+	exit
+}
+source $path/graph.tcl
+source $path/message.tcl
+
+#----------------------------------------------------------------------
+# proc print_info { str }
+#----------------------------------------------------------------------
+
+proc print_info { str } {
+    
+    .frames.state configure -state normal
+    .frames.state insert end "$str"
+    .frames.state see end
+    .frames.state configure -state disabled
+}
+
+#----------------------------------------------------------------------
+# proc read_process { input }
+#----------------------------------------------------------------------
+
+proc read_process { input } {
+
+    while { [set rv [gets $input line]] != -1 } {
+	print_info $line\n
+    }
+    if { [eof $input] } {
+	catch {close $input}
+    }
+}
+
+#----------------------------------------------------------------------
+# proc run_sim { options }
+#----------------------------------------------------------------------
+
+proc run_sim { options } {
+    global sim
+
+    if { [catch {set sim [open "|sim $options |& cat" "r"]}] } {
+	print_info "I can't start sim.\n"
+    } else {
+	print_info "Sim started...\n"
+	.frame4.run_button configure -text "Stop" -command "stop_cb $sim 1"
+	fconfigure $sim -blocking 0
+	fileevent $sim readable "read_process $sim"
+    }
+}
+
+
+#----------------------------------------------------------------------
+# proc run_cb {}
+#----------------------------------------------------------------------
+
+proc run_cb {} {
+
+    global delay
+
+    set ifile [.frame1.file_entry get]
+    set ofile [.frame2.file_entry get]
+    set sframe [.frame3.start_entry get]
+    set eframe [.frame3.end_entry get]
+
+    set option "-d $delay "
+    if { [string length [string trim $ofile]] > 0 } {
+	append option "-o $ofile "
+    }
+    if { [string length [string trim $sframe]] > 0 } {
+	append option "-s $sframe "
+    }
+    if { [string length [string trim $eframe]] > 0 } {
+	append option "-e $eframe "
+    }
+    if { [string length [string trim $ifile]] > 0 } {
+	run_sim "$option $ifile"
+    } else {
+	print_info "You must fill in the Input file field!\n"
+    }
+}
+
+#----------------------------------------------------------------------
+# proc edit_cb {}
+#----------------------------------------------------------------------
+
+proc edit_cb {} {
+
+    set ifile [string trim [.frame1.file_entry get]]
+    if { [string length $ifile] == 0 } {
+	print_info "You must fill in the Input file field!\n"
+	return
+    }
+    wm title .editor $ifile
+    .editor.main.text delete 1.0 end
+    if { ! [catch {set f [open $ifile "r"]}] } {
+	.editor.main.text insert 1.0 [read $f]
+	close $f
+	print_info "Edit file: $ifile\n"
+    } else {
+	print_info "Edit new file: $ifile\n"
+    }
+
+    wm deiconify .editor
+}
+
+#----------------------------------------------------------------------
+# proc stop_cb { sim msg }
+#----------------------------------------------------------------------
+
+proc stop_cb { sim msg } {
+
+    set error [catch {exec kill [lindex [pid $sim] 0]}]
+    if { $error && $msg } {
+	print_info "I can't stop process sim.\n"
+    } elseif { ! $error } {
+	print_info "Sim stopped.\n"
+    }
+    .frame4.run_button configure -text "Run" -command "run_cb"
+}
+
+#----------------------------------------------------------------------
+# proc show_cb { }
+#----------------------------------------------------------------------
+
+proc show_cb { } {
+
+    set ofile [.frame2.file_entry get]
+    if { [string length $ofile] == 0 } {
+	print_info "You must fill in the Output file field!\n"
+	return
+    }
+    if { [catch {set f [open $ofile "r"]}] } {
+	print_info "I can' open the data file: $ofile\n"
+	return;
+    }
+    set header ""
+    set data [read_data $f header]
+    close $f
+    if {[llength $data] == 0 || [llength [lindex $data 0]] < 2 } {
+	print_info "File $ofile hasn't got enough data or it has \
+incorrect format.\n"
+    } else {
+	set mint [lindex [lindex $data 0] 0]
+	set maxt [lindex [lindex $data 0] end]
+
+	update_show_dialog .show_dialog [lrange $header 1 end] .diagram \
+		$mint $maxt [lrange $data 1 end]
+	wm deiconify .show_dialog
+    }
+}
+
+#----------------------------------------------------------------------
+# proc read_data { input h }
+#----------------------------------------------------------------------
+
+proc read_data { input h } {
+
+    upvar $h x
+    gets $input x
+    if { [string compare "time" [lindex $x 0]] } {
+	return ""
+    }
+
+    gets $input line
+    set num_cols [llength $line]
+    while { ![eof $input] } {
+	for {set j 0} {$j < $num_cols} {incr j} {
+	    lappend column($j) [lindex $line $j]
+	}
+	gets $input line
+    }
+    for {set j 0} {$j < [array size column]} {incr j} {
+	lappend result $column($j)
+    }
+    return $result
+}
+
+#----------------------------------------------------------------------
+# proc input_browser_cb { name }
+#----------------------------------------------------------------------
+
+proc input_browser_cb { name } {
+
+    .frame1.file_entry delete 0 end
+    .frame1.file_entry insert 0 $name
+}
+
+#----------------------------------------------------------------------
+# proc output_browser_cb { name }
+#----------------------------------------------------------------------
+
+proc output_browser_cb { name } {
+
+    .frame2.file_entry delete 0 end
+    .frame2.file_entry insert 0 $name
+}
+
+#----------------------------------------------------------------------
+# create widgets
+#----------------------------------------------------------------------
+
+# sim is not running
+set sim -1
+
+create_file_dialog .input_browser input_browser_cb
+wm title .input_browser "Open file"
+create_file_dialog .output_browser output_browser_cb
+wm title .output_browser "Save file as..."
+
+label .file_label1 -text "Input file:"
+frame .frame1
+entry .frame1.file_entry -width 30
+button .frame1.browse -text "Browse" -command "show_file_dialog .input_browser"
+
+label .file_label2 -text "Output file:"
+frame .frame2
+entry .frame2.file_entry -width 30
+button .frame2.browse -text "Browse" \
+	-command "show_file_dialog .output_browser"
+
+set delay 0
+scale .delay -label "Delay:" -from 1 -to 50 -length 70 -showvalue 1 \
+	-variable delay -orient horizontal
+
+frame .frame3
+label .frame3.start_label -text "Start frame:"
+label .frame3.end_label -text "  End frame:"
+entry .frame3.start_entry -width 4
+entry .frame3.end_entry -width 4
+
+label .state_label -text "State of simulator:"
+
+frame .frames
+text .frames.state -state disabled -width 50 -height 10 -font fixed \
+	-yscrollcommand ".frames.state_scroll set"
+scrollbar .frames.state_scroll -command ".frames.state yview"
+
+frame .frame4 -relief groove
+button .frame4.run_button -text "Run" -command "run_cb"
+button .frame4.edit_button -text "Edit" -command "edit_cb"
+button .frame4.show_button -text "Show data" -command "show_cb"
+button .frame4.cancel_button -text "Exit" -command "exit"
+
+pack .file_label1 -anchor w
+
+pack .frame1 -fill x -pady 3 -padx 5
+pack .frame1.file_entry -side left -fill x -expand 1
+pack .frame1.browse -after .frame1.file_entry -side left
+
+pack .file_label2 -anchor w
+
+pack .frame2 -fill x -pady 3 -padx 5
+pack .frame2.file_entry -side left -fill x -expand 1
+pack .frame2.browse -side left
+
+pack .delay -fill x -pady 5 -padx 5
+
+pack .frame3 -fill x -pady 5 -padx 5
+pack .frame3.start_label -side left
+pack .frame3.start_entry -side left
+pack .frame3.end_label -side left
+pack .frame3.end_entry -side left
+
+pack .state_label -anchor w
+
+pack .frames -side top -fill both
+pack .frames.state -side left -fill both -expand 1
+pack .frames.state_scroll -side left -fill y
+
+pack .frame4 -fill x -side top -pady 10
+pack .frame4.run_button -side left -expand 1
+pack .frame4.edit_button -side left -expand 1
+pack .frame4.show_button -side left -expand 1
+pack .frame4.cancel_button -side left -expand 1
+
+focus .frame1.file_entry
+
+#
+# create editor window
+#
+
+toplevel .editor
+
+frame .editor.main
+text .editor.main.text -yscrollcommand ".editor.main.scroll set" -font fixed
+scrollbar .editor.main.scroll -command ".editor.main.text yview"
+
+frame .editor.buttons
+button .editor.buttons.apply -text "Apply" -command {
+    set output [wm title .editor]
+    if { [catch {set ofile [open $output "w"]}] } {
+	wm deiconify .editor
+	print_message "I can't write file: $output\n"
+    } else {
+	puts $ofile [.editor.main.text get 1.0 end]
+	close $ofile
+	print_info "$output is saved.\n"
+    }
+}
+
+button .editor.buttons.applyclose -text "Apply & Close" -command {
+    wm withdraw .editor
+    eval [.editor.buttons.apply cget -command]
+}
+button .editor.buttons.close -text "Close" -command {
+    set output [wm title .editor]
+    print_info "$output is canceled.\n"
+    wm withdraw .editor
+}
+
+pack .editor.main -fill both
+pack .editor.main.text -side left -fill both
+pack .editor.main.scroll -side left -fill y
+
+pack .editor.buttons -fill x
+pack .editor.buttons.apply -side left -expand 1
+pack .editor.buttons.applyclose -side left -expand 1
+pack .editor.buttons.close -side left -expand 1
+
+focus .editor.main.text
+wm withdraw .editor
+
+#
+# create canvas for diagrams
+#
+
+toplevel .diagram
+frame .diagram.frame
+label .diagram.frame.label -text "Motion curves" \
+	-font "-*-times-*-*-*-*-18-*-*-*-*-*-iso8859-1"
+canvas .diagram.frame.canvas -width 500 -height 400 -closeenough 0
+button .diagram.frame.cancel -text "Close" -command { wm withdraw .diagram }
+
+pack .diagram.frame -expand 1 -fill both
+pack .diagram.frame.label -pady 15
+pack .diagram.frame.canvas -expand 1 -fill both
+pack .diagram.frame.cancel -anchor e -padx 10 -pady 5
+
+wm withdraw .diagram
+wm resizable .diagram 0 0
+wm title .diagram "Motion data"
+
+#
+# create show dialog
+#
+
+create_show_dialog .show_dialog
+
+#
+# create message dialog
+#
+
+create_message
+
+wm title . "Editor for sim"
+
+# --- end of edsim.tcl

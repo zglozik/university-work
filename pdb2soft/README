@@ -1,0 +1,24 @@
+
+pdb2soft:
+---------
+
+
+Tfh. az SI a softimage root konyvtara. A pdb2soft konyvtar strukturaja a
+kovetkezo:
+
+pdb2soft/custom_tools:
+	pdb2soft.cus: A softimage-ben megjeleno menu definiciojat tartalmazza,
+		az $SI/3D/custom/tools konyvtarba kell tenni.
+	pdb2soft.sh: Egy shell script, ami meghivja a pdb2soft binaris
+		atalakito programot a megfelelo parameterekkel. Mindegy, hogy			hol van, csak a PATH kornyezeti valtozo tartalmazza a helyet
+		a softimage inditasakor. Celszeru betenni az $SI/3D/custom/bin
+		ala.
+	pdb2soft: A binaris atalakito program, a pdb2soft.sh-val egy konyvtarban
+		celszeru tartani. Onalloan is tud PDB file-okat atalakitani,
+		nem csak softimage-bol.
+
+pdb2soft/src:
+	A pdb2soft C forras file-jai.
+	Forditas: "make", ekkor ebben a konyvtarban letrejon a pdb2soft 
+	futtathato file.
+

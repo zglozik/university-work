@@ -1,0 +1,10 @@
+
+position 200, 200
+pen down
+i := 0
+while i < 150
+	forward 10
+	left 10 + i/5
+	i := i + 1
+end
+

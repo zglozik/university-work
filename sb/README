@@ -1,0 +1,53 @@
+
+Snack Bar szimulacio
+--------------------
+
+	A program egy bufet szimulal, amiben van egy elado es nehany vevo.
+Az arukeszlet nem allando, folyamatosan szallitjak a bufebe a termekeket.
+Az emberek meghatarozott idonkent ternek be a bufebe, majd a vasarolt
+etel elfogyasztasa utan elhagyjak a helyet. A programot ket konfiguracios
+file-lal lehet parameterezni:
+
+manager.in:
+	Ebben szerepelnek a bufebe erkezo emberek nevei, erkezesi sorrendben,
+valamint az emberek erkezese kozotti idotartam percekben. Minden sorban
+egy ember szerepel a kovetkezo szintaxis szerint:
+
+<nev><tabulator><kovetkezo ember erkezesenek ideje az o erkezesi idejehez \
+viszonyitva>
+
+peldaul:
+z1	0
+busy	2
+dori	0
+
+store.in:
+	Ebben a file-ban lehet megadni, hogy milyen termekeket, mennyit es
+mikor hoznak a bufebe. Minden sorban egy termek nevenek, a szallitott
+mennyisegnek, es a kovetkezo szallitas idejenek kell szerepelni.
+Szintaxis:
+
+<termek neve><tabulator><szallitott mennyiseg><tabulator><kovetkezo szallitas \
+ideje>
+
+peldaul:
+sprite		3	0
+coca cola	5	2
+hamburger	10	0
+
+A nevek a kovetkezok lehetnek:
+	sprite, coca cola, tonic, fanta, hamburger, csirke, pizza
+
+	A programot az 'sb' paranccsal kell elinditani. A program indulasa
+utan kiirja a bekovetkezett esemenyeket. Minden sor elejen szerepel az
+objektum neve, amelyik az esemenyt megkapta, majd az esemeny leirasa.
+Sorban bejonnek a vevok a bufebe, rendelnek, fizetnek, esznek, majd kimennek.
+Ha nem tudtak enni semmit, akkor nem ulnek le, azonnal kimennek. A vevok
+egy sorba allnak be, mindig az elol szereplot szolgalja ki az elado eloszor.
+A bufebe mukodese kozben elelmiszer-szallitmanyok is erkezhetnek. 
+
+	A program akkor fejezodik be, ha mindenki kiment a bufebol.
+
+						Kesszitette: Glozik Zoltan
+
+

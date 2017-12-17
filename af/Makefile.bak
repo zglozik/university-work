@@ -1,0 +1,44 @@
+
+CXX = g++
+CXXFLAGS = -Wall -g
+LDFLAGS =
+
+SOURCES = main.cc MessageQueue.cc Object.cc Owner.cc Animals.cc Equerry.cc \
+	Buyer.cc random.cc
+
+OBJECTS = $(SOURCES:.cc=.o)
+
+af: $(OBJECTS)
+	$(CXX) -o $@ $^ $(LDFLAGS)
+
+depend:
+	makedepend -Y $(SOURCES)
+
+clean:
+	rm *~ *.o af core
+
+ # DO NOT DELETE
+
+main.o: af.h MessageQueue.h generic.h Object.h Equerry.h Animals.h Owner.h
+main.o: Buyer.h
+MessageQueue.o: MessageQueue.h generic.h Object.h
+Object.o: Object.h
+Animals.o: Animals.h Object.h Equerry.h random.h
+Equerry.o: Equerry.h Object.h Animals.h
+Buyer.o: Buyer.h Object.h Animals.h Equerry.h af.h MessageQueue.h generic.h
+Buyer.o: Owner.h
+# DO NOT DELETE
+
+main.o: af.h MessageQueue.h generic.h Object.h Equerry.h Animals.h Owner.h
+main.o: Buyer.h
+MessageQueue.o: MessageQueue.h generic.h Object.h
+Object.o: Object.h
+Owner.o: Owner.h Object.h Animals.h Buyer.h af.h MessageQueue.h generic.h
+Owner.o: Equerry.h random.h
+Animals.o: Animals.h Object.h random.h Equerry.h generic.h af.h
+Animals.o: MessageQueue.h Owner.h Buyer.h
+Equerry.o: Equerry.h Object.h Animals.h generic.h af.h MessageQueue.h Owner.h
+Equerry.o: Buyer.h random.h
+Buyer.o: Buyer.h Object.h Animals.h Owner.h af.h MessageQueue.h generic.h
+Buyer.o: Equerry.h random.h
+random.o: random.h

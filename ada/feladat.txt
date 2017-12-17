@@ -1,0 +1,37 @@
+1. Irj generic fuggvenyt, ami kiszamitja ket T tipusu elem maximumat.
+A generic parameterek a T tipus, valamint egy < operator a T tipuson.
+
+2. Alakitsd at az elozo generic fuggvenyt egy generic package-e ugy,
+hogy a package tartalmazzon a maximumot szamolo fuggvenyen kivul egy 
+exception-t is (NOT_COMPARABLE); ezt az exception-t valtsa ki a 
+maximumszamolo fuggveny, ha a parameterkent adott ket T tipusu ertekre
+sem a<b, sem b<a nem all fenn.
+
+3. Irj egy FIU unio tipust, ami integer-t vagy float-ot tartalmaz. 
+A tipus egyetlen muvelete a < relacio. Ez a relacio igy definialt:
+   - ha ket integer-t tartalmazo erteket hasonlitok ossze, akkor az
+     integer-eken ertelmezett < relacio
+   - ha ket float-ot tartalmazot, akkor a float-okon ertelmezett <
+   - kulonbozo tipusu erteket tartalmazo FIU ertekek kozott nincs
+     < relacio
+
+4. Peldanyositsd a (2) generic package-et a (3) tipussal. Hivd meg
+a maximumot szamito fuggvenyt a 4 es 3, a 3.0 es 4.0 valamint a
+3.0 es 3 ertekeket tartalmazo parokra. A keletkezo kivetelt kezeld le.
+
+5. Irj egy task-os szimulacio programot a kovetkezo problemara.
+Adott egy Sorompo, harom muvelettel: Felenged, Leenged es Athalad.
+Amig a Sorompo felengedett allapotban van, le lehet engedni, es at
+lehet haladni rajta (ez utobbit csak akkor, ha a Leenged entry-nel
+nincs varakozo hivas: hasznald az <entry-nev>'COUNT attributumot).
+Csak leengedett sorompot lehet Felenged-ni. Ha minden mas taszk
+vegetert a programban, erjen veget a Sorompo is.
+Adva van az Auto task tipus is. Az autok odamennek a Sorompohoz (ez
+ODAER ideig tart), megprobalnak athaladni a Sorompon, meghivva annak
+megfelelo entry-jet (Athalad). Ha ez nem sikerul VAR ideig, akkor
+hibauzenettel vegeternek (egy exception kivaltasa is jo).
+A foprogram elindit nehany autot, majd kis ido mulva leengedi a 
+Sorompot. Megint elindit nehany autot, majd felengedi a Sorompot.
+Az autok inditasa new-val tortenjen (access tipussal).
+
+

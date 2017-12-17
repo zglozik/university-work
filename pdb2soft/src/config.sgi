@@ -1,0 +1,3 @@
+
+CFLAGS =  -xansi -fullwarn -g -I$(SI)/3D/dev/DKit/h # -DDEBUG
+LDFLAGS = -L$(SI)/3D/dev/DKit/lib/ -ldkit -ldbdk -lm

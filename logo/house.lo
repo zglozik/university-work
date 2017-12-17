@@ -1,0 +1,18 @@
+position 100, 100
+pen down
+direction -90
+forward 80
+left 90
+forward 100
+left 90
+forward 80
+pen up
+backward 10
+right 90
+forward 10
+
+left 135
+pen down
+forward 85
+left 90
+forward 85

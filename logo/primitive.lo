@@ -1,0 +1,55 @@
+
+function circle( r )
+	
+	_n := 20
+	_a := (360 / _n) / 2
+	_side := 2 * r * sin(_a)
+	_b := (2 * _a)
+	
+	pen up
+	forward r
+	pen down
+	left 90
+	_i := 0
+	while _i < _n
+		forward _side
+		left _b
+		_i := _i + 1
+	end
+end
+
+function box( r1, r2 )
+
+	pen down
+	forward r1
+	left 90
+	forward r2
+	left 90
+	forward r1
+	left 90
+	forward r2
+	left 90
+end
+
+function spiral()
+	pen down
+	_i := 0
+	while _i < 150
+		forward 10
+		left 10 + _i/5
+		_i := _i + 1
+	end
+end
+
+# main program
+
+position 100, 50
+circle( 20 )
+
+position 200, 50
+left 20
+box( 30, 10 )
+
+position 150, 150
+spiral()
+

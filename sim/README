@@ -1,0 +1,412 @@
+
+			FELHASZNÁLÓI DOKUMENTÁCIÓ
+
+
+I. Bevezetés
+~~~~~~~~~~~~
+
+	A szimulációt végrehajtó rendszer két futtatható programból áll, az
+egyik a szimulációkészítés szerkesztési fázisában használható, a másik pedig a
+kész animáció softimage-be illesztését végzi el. A programok bemenete egy
+speciális nyelven megírt szöveges állomány, a kimenete pedig az animáció és az
+animáció egyes idôpillanataira jellemzô adatokat tartalmazó szöveges állomány.
+Egy animáció elkészítésének a menete a következô lehet:
+
+1., valamilyen szövegszerkesztôvel készítsük el a mozgást leíró állományt (vagy
+használjuk az "edsim" programot)
+
+2., a "sim" programot indítsuk el, az elkészített állományt adjuk meg a
+"sim"-nek (vagy használjuk az "edsim" programot)
+
+3., az elsô két pontot ismételjük addig, amég nem a kívánt mozgást hoztuk létre
+
+4., elkészíthetjük az animációt a SoftImage-el, válasszuk ki a "Motion" modult,
+majd a "Custom" menüpontból a "sim" alpontot. A megjelenô ablakban adjuk meg a
+korábban létrehozott program állomány nevét. A "Render" menüpontot kiválasztva
+filmet készíthetünk az animációból, amit aztán bármilyen megjelenítôprogrammal
+lejátszhatunk.
+
+A "sim" program az X képernyôn jeleníti meg a mozgást, a "sim_si" program pedig
+a softimage által olvasható adatokat hoz létre. A "sim" program kényelmesebb
+használatához készült az "edsim" modul, amivel interaktívan szerkeszthetünk
+mozgás adatokat és a lejátszott mozgás görbéit is képes grafikonon
+megjeleníteni. A program használatának leírása késôbb szerepelni fog.
+
+II. A programnyelv:
+~~~~~~~~~~~~~~~~~~~
+
+	A program négy részbôl épül fel. Minden programban mind a négy résznek
+szerepelnie kell. Az egyes részek megadásának sorrendje kötött. Ezekben a
+programrészekben lehet meghatározni a mozgatandó alak testrészeit, a csuklókat,
+a kezdeti állapotot és az idô függvényében az izületi szögeket. A program
+megkülönbözteti a kis- és nagybetûket. Megjegyzéseket is írhatunk a forrás
+szövegbe a "#" jel után. A megjegyzés a sor végéig tart.
+
+1.,
+
+A program elsô része a test leírására szolgál, a "BODY PARTS" szöveggel kell
+kezdeni. Ebben a részben kell megadni az egyes testrészek nevét,
+tömegközéppontját, tömegét, hosszát, valamint azt, hogy a megjelenítés közben
+látni akarjuk-e a testrész tömegközéppontjának az útját.
+
+Pl.:
+
+BODY PARTS
+
+	ROUTE
+	knee: 0.8, 5, 0.5, NOROUTE
+	thigh: 0.9, 15, 2/3, ROUTE
+	body: 1.2, 45, 3/4, NOROUTE
+	# peg: 0.3, 1, 1/2, ROUTE ez egy sor megjegyzés
+
+A "BODY PARTS" után meg kell adni, hogy a rendszer tömegközéppontját látni
+akarjuk-e a szimuláció közben. Két érték közül választhatunk: "ROUTE",
+"NOROUTE". Ezután következnek a testrészek. Elôször a testrész neve, majd a
+hossza méterben, a tömege kg-ban, valamint a tömegközéppont távolsága a
+testrész kezdöpontjától, ha egység hosszúnak tételezzük fel a testrészt.  A
+részekhez tartozó utolsó adat a tömegközéppont megjelenítését vezérli. A
+paramétereket vesszôvel kell elválasztani. Általában is igaz, hogy az egyes
+szintaktikus egységek között akárhány szóköz és új sor karakter szerepelhet,
+így a forrás szöveget tetszôlegesen formázhatjuk. Minden olyan helyen a
+programban, ahol valamilyen számértéket kell megadni (pl.: testrész hossza),
+tetszôleges kifejezés is szerepelhet. A kifejezések nyelvtana késôbb
+részletesen szerepelni fog.
+
+2.,
+
+A második részben a csuklókat adhatjuk meg. Minden csuklót két testrész egy-egy
+végpontja határoz meg, plusz egy vektor. A plusz vektor a szögek egyértelmû
+megadásához szükséges. Tegyük fel, hogy a derékhoz tartozó csuklót akarjuk
+megadni. A derék a comb és a felsôtest találkozásánál van. Legyen a két
+testrész által bezárt szög 45 fok, a megadott vektor pedig a [0,-1,0] vektor
+(ez a vektor a képernyôre merôleges, és felénk néz). Ez azt jelenti, hogy a
+[0,-1,0] vektor felôl nézve a combot 45 fokkal kell elfordítani az óra
+járásával ellentétes irányba a csatlakozási pontba állított [0,-1,0] vektor
+körül, hogy megkapjuk a felsô testet. Egy ilyen vektor bevezetésével
+egyértelmûvé lehet tenni az izületi szögek megadását.
+
+A csuklókhoz tartozó testrészek megadása a testrész nevének és a "start" vagy
+"end" szónak a ponttal való összekötésével adható meg. A "start" a testrész
+egyik, az "end" pedig a másik végét jelenti. Fontos a csuklók megadásának a
+sorrendje! Az elsô csuklót kivéve, minden csukló megadásában szereplô két
+testrész közül pontosan az egyiknek már szerepelni kellett korábbi csuklók
+megadásában. A példában az elsô sorban szerepel a "shin" testrész, így a
+második sorban a derék megadásakor már használhatjuk a "shin" szót, és mivel
+még nem szerepelt, a "body" szót is. Ezt a részt a "WRISTS" kulcsszóval kell
+kezdeni, majd következnek sorban egymás után a csuklók. Elôször a csukló neve,
+majd a két pont, valamint a korábban tárgyalt vektor. Mivel a program csak két
+dimenzióban mûködik, a harmadik vektornak csak két értelmes értéke lehet:
+[0,1,0], ez a képernyôbe mutat, és [0,-1,0], ami felénk mutat.
+
+Pl.:
+
+WRISTS # kötelezô kulcsszó
+
+	knee: shin.end, thigh.start, [ 0, 1, 0 ]
+	waist: thigh.end, body.start, [ 0, -1, 0 ]
+
+3.,
+
+A harmadik részben kell megadni minden egyes csuklóhoz a mozgását leíró
+adatokat. Minden a "WRISTS" részben megadott csuklónak szerepelnie kell, és
+minden csukló csak egyszer szerepelhet! Elôször meg kell adni a csukló nevét,
+majd a mozgást. A mozgást is részenként, idôpontonként vagy
+idôintervallumonként kell megadni. Az idôpontokat 0-tól kell kezdeni és
+másodpercekben értendôk. Az idôpontoknak és idôintervallumoknak monoton növô
+sorozatot kell alkotniuk. Az idôpontot vagy idôintervallumot háromféleképpen
+adhatjuk meg:
+
+a., csak idôpont, például:
+
+	1.5: 2*t;
+	3.4: 45;
+
+A kifejezésekben használhatjuk a "t" speciális változót, ami az aktuális
+idôpontot jelenti. Ebben a példában a hajlásszög az 1.5-ik másodpercben 3 fok
+lesz, a 4.3-ik másodpercben pedig 45 fok. A program interpolációt végez azokon
+az idôpontokon, amelyeket nem adunk meg.
+
+b., intervallum:
+
+	0-2: 45;
+	2-4: 45 + (t-2)^2 * 20;
+	5-8: 70;
+
+Az elsô két másodpercben a szög 45 fok lesz, majd a következô négy másodpercben
+négyzetesen változik 45 fokról 125 fokra, majd 1 másodperc alatt lecsökken 70
+fokra és utána nem is változik. Ha valamelyik intervallum vége és a
+következô intervallum eleje egybe esik (mint a példában), akkor a közös pontban
+a szögeknek meg kell egyezniük (most 45 fok).
+
+c., fél intervallum:
+
+	0-4: 12;
+	6: 50;
+	-8: 50 + t*(t-6);
+
+Ez ekvivalens azzal, mintha teljes intervallumot adnánk meg, az elôzô rész
+végpontját felhasználva kezdôpontként.
+
+Pl.:
+
+PROGRAM # kötelezô kulcsszó
+
+knee:
+	0-0.6: 45 + 130 * (t/0.6)^4;
+	0.9: 45;
+	1.2: 60;
+
+waist:
+	0-0.58: 50 + 122.5 * (t/0.6)^6;
+	1: 50;
+
+4.,
+
+Ebben a részben kell megadni a test kezdôpontját. Az "INIT" kulcsszó után
+következik egy testrész valamelyik végpontjának a neve, majd egy pozíció (az y
+koordinátát mindig 0-nak kell választani, mert a program csak az x-z síkban
+képes lejátszani a szimulációt). A megadott testrész a megadott pozícióba fog
+kerülni, a vízszintessel bezárt szöget a második paraméter határozza meg.
+
+Pl.:
+
+INIT
+
+shin.start: [ 0, 0, 0 ], 60
+
+
+A programnyelv pontos nyelvtana a következô:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+s:
+	BODY PARTS ROUTE body_parts
+	WRISTS wrist_parts
+	PROGRAM program_parts
+	INIT init_part
+
+init_part:
+	part_point ':' point ',' expression
+
+program_parts:
+	program
+	| program_parts program
+
+program:
+	wrist_id ':' sections
+
+wrist_id:
+	ID
+
+sections:
+	section
+	| section sections
+
+section:
+	boundaries ':' section_program ';'
+
+boundaries:
+	NUMBER
+	| '-' NUMBER
+	| NUMBER '-' NUMBER
+
+section_program:
+	FIXED
+	| expression
+
+wrist_parts:
+	wrist
+	| wrist_parts wrist
+
+wrist:
+	ID ':' part_point ',' part_point ',' point
+
+body_parts:
+	part
+	| part body_parts
+
+part:
+	ID ':'
+		expression',' # hossz
+		expression',' # tömeg
+		expression',' # középpont
+		ROUTE
+
+expression:
+	expr
+
+expr:
+	NUMBER
+	| ID
+	| '('expr')'
+	| expr '+' expr
+	| expr '-' expr
+	| expr '/' expr
+	| expr '*' expr
+	| '+' expr
+	| '-' expr
+	| expr '^' expr
+	| SQRT '(' expr ')'
+	| SIN '(' expr ')'
+	| COS '(' expr ')'
+	| TAN '(' expr ')'
+	| EXP '(' expr ')'
+
+part_point:
+	ID '.' START
+	| ID '.' END
+
+point:
+	'[' expression ',' expression ',' expression ']' # x, y, z kkordináta
+
+A nagybetûvel írt szimbólumok a nyelv szintaktikus egységeit jelentik, ezek a
+következôk:
+
+DIGIT: [0-9] ID: [a-zA-Z][a-zA-Z0-9_]*
+
+BODY:	"BODY" 
+PARTS:	"PARTS" 
+WRISTS:	"WRISTS" 
+INIT:	"INIT" 
+PROGRAM:"PROGRAM"
+FIXED:	"fixed"
+START: 	"start"
+END: 	"end"
+
+SQRT:	"sqrt"
+SIN:	"sin"
+COS:	"cos" 
+TAN:	"tan" 
+EXP:	"exp"
+
+ROUTE: "ROUTE"|"NOROUTE"
+
+NUMBER: {DIGIT}+|{DIGIT}+"."{DIGIT}*
+
+
+III. A "sim" program használata:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	A "sim" program bemenete egy állomány, ami egy, az elôzô szakaszban
+leírt  programnyelvnek megfelelô programot tartalmaz. A "sim" program a
+megadott mozgást az X Window képernyôn lejátsza. A mozgásnak akkor van vége,
+amikor a test csuklói nem mozognak és a test is nyugalomba került. Ekkor egy
+másodperc elteltével a "sim" újra kezdi játszani a mozgást. Ha mozgás közben a
+test túl messzire kerülne a középponttól, akkor a program a "body went too far"
+üzenettel leáll. Ez akkor is elôfordulhat, ha rossz szögelhajlást adunk meg az
+"INIT" részben. A "sim" indítása:
+
+sim [-d delay_factor] [-s <start_frame>] [-e <end_frame>] [-o <file_name>]
+[<file_name>]
+
+Az opciók jelentése:
+
+-d: Egy nem negatív számot kell megadni, az egyes képrészletek közötti
+késleltetés megadására szolgál. Az értéke 1 és 50 között változhat. A megadott
+értékszer  0.02 másodperc fog eltelni a képrészletek között. Az alapértelmezés
+1.
+
+-s: Hanyadik képrészlettôl kezdje el megjeleníteni a szimulációt a
+program. Arra használható, hogy az egész mozgásnak csak egy kis részét
+jelenítsük meg. Ha nem adjuk meg, akkor 0 az alapértelmezés.
+
+-e: Az itt megadott számú képrészlet lesz az utolsó. Nagyobbnak vagy egyenlônek
+kell lennie, mint az -s opcióban megadott érték. Ha nem adunk meg semmit, akkor
+a mozgást végig lejátsza a program.
+
+-o: A kimeneti állomány nevét adhatjuk meg. Ha nem adunk meg semmit, akkor nem
+jön létre ilyen állomány (ez az alapértelmezés). Ebben az állományban nézhetjük
+meg a mozgásra vonatkozó numerikus adatokat, és a grafikonokat megjelenítô
+program is ezt az állományt használja. Az állomány elsô sora tartalmazza a
+mezôk neveit, majd a második sortól kezdve minden sor egy-egy idôpillanatnak
+megfelelô adatokat tartalmaz, az elsô sorban megadott sorrendben.
+
+file_name: A forrásprogramot tartalmazó állomány neve. Ha nem adjuk meg, akkor
+a standard bemenetrôl olvassa be a programot.
+
+A "sim" elindulása után egy ablakban jeleníti meg a mozgást, ekkor már semmit
+nem tudunk módosítani a megjelenítésen. Az ablak bal felsô sarkában látszik az
+aktuális képrészlet sorszáma. A programból a bal felsô sarokban lévô menübôl a
+"Close" pontot kiválasztva lehet kilépni.
+
+IV. A "sim_si" program használata:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	A "sim_si" program mûködését és paraméterezését tekintve azonos a "sim"
+programmal, azzal a különbséggel, hogy az eredményt nem egy X Window ablakban
+jeleníti meg, hanem a standard kimenetre írja a SoftImage által olvasható
+formában. Ezt a programot közvetlenül nem szükséges használni, a SoftImage
+fogja elindítani Renderelésnél.
+
+V. Az "edsim" program használata:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	Az "edsim" program a "sim" program könnyebb használatát segíti elô,
+valamint képes megjeleníteni a "sim" által létrehozott kimeneti állományokban
+lévô adatokat grafikonokon. A program indítása elôtt a SIM_TCL környezeti
+változót be kell állítani a forrásprogramot tartalmazó tartalomjegyzékre, ha
+nincs beállítva, akkor a program "/usr/local/sim/tcl"-t feltételez. A program
+az "edsim" beírásával indul, majd megjelenik a fôablak. Ennek felépítése a
+következô:
+
+Input file: Ide kell beírni a mozgás leírását tartalmazó állomány nevét. A
+"Browse" gombot megnyomva egy dialog ablakból választhatjuk ki a
+forrásprogramot, a megfelelô névre kétszer kattintva az egérrel, vagy az "Ok"
+gomb megnyomásával a "File:" mezô kitöltése után.
+
+Output file: Itt kell megadni, hogy milyen nevû állományban akarjuk tárolni a
+mozgás numerikus eredményeit. Ha nem töltjük ki, akkor nem jön létre semmilyen
+állomány, és akkor meg sem tudjuk jeleníteni az adatokat.
+
+Delay: A képrészletek közötti várakozás idôtartamát jelenti. Ugyanaz, mint a
+"sim" program "-d" opciója.
+
+Start frame: Az elsô képrészlet sorszámát kell ideírni, megegyezik a "sim"
+program "-e" opciójával. Ha nem adunk meg semmit, 0 az alapértelmezés.
+
+End frame: Az utolsó képrészlet sorszámát kell ebben a mezôben megadni,
+megyegyezik a "sim" program "-e" opciójával. Ha nem adunk meg semmit, a mozgást
+végig le fogja játszani.
+
+State of simulator: Ebben az ablakban látszik a szimulátor állapota, itt
+jelennek meg az esetleges hibák, üzenetek.
+
+Run: A gombot megnyomva megjelenik egy ablak, amiben lefut a szimuláció a
+korábban beállított értékeknek megfelelôen. Tulajdonképpen a "sim" program
+indul el a megadott paraméterekkel. Az indítás után a paraméterek
+megváltoztatása nincs hatással a mozgás lejátszására.
+
+Stop: A "sim" sikeres elindulása után a "Run" gombból "Stop" gomb lesz. Ezt
+megnyomva megállíthatjuk a szimuláció lejátszását, majd késôbb újraindíthatjuk.
+
+Edit: Az "Input file:" mezôben megadott forrásprogramot tartalmazó állományt
+módosíthatjuk. Ha a megadott állomány nem létezik, akkor újat hozhatunk létre.
+A megjelenô ablakban a "Close" gomb megnyomásával a módosítások elvesznek, az
+"Apply" megnyomásával az állomány a módosított programot fogja tartalmazni, az
+"Apply & Close" megnyomása pedig aktualizálja az állományt és eltünteti a
+szerkesztô ablakot.
+
+Show data: Az "Output file:" mezôben megadott állományban szereplô numerikus
+adatokat nézhetjük meg. A grafikonok megjelenése közben az egérrel valamelyik
+függvényt megérintve az ablak alsó sorában látszik a függvény pontos értéke az
+adott helyen, valamint a függvény neve.
+
+Exit: Megnyomásával kiléphetünk a programból.
+
+VI. A forrásprogram:
+~~~~~~~~~~~~~~~~~~~~
+
+sim/include: a fordításhoz szükséges c++ header file-okat tartalmazza
+
+sim/src: tartalmazza az összes c++ forrásprogramot és a Makefile-t
+
+sim/tcl: az edsim futtatásához szükséges tcl állományok
+
+sim/data: néhány példa program
+
+
+Sok sikert (és türelmet) kívánok a program használatához!
+
+					Glózik Zoltán <glozikz@ludens.elte.hu>
+
+Budapest, 1997 11.04.
+

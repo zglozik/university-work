@@ -1,0 +1,22 @@
+
+Garbage Collector
+~~~~~~~~~~~~~~~~~
+
+	Ez egy hivatkozás számlálóval mûködô garbage collector. A 'make'
+paranccsal le lehet fordítani a példaprogramot, ami egy sor implementáción
+mutatja be az osztály használatát. A garbage collectort használó osztályoknak a
+Reference osztályból kell származniuk. Az osztályra mutató típust a Ptr 
+template-tel hozhatunk létre. A Ptr osztály figyeli az általa mutatott 
+objektumra létrehozott hivatkozásokat, és ha nincs rá több hivatkozás, akkor
+felszabadítja.
+	
+A példa futtatása:
+
+$ make
+$ ./gc < input
+vagy debug info nélkül:
+$ ./gc 2>/dev/null < input
+
+Sok sikert a használatához!
+
+	Glózik Zoltán <glozikz@ludens.elte.hu>

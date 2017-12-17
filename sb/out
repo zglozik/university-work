@@ -1,0 +1,184 @@
+Busy: Beleptem. Keresem a sort.
+Elado: Kaptam arut a raktarbol: hamburger, 3 db.
+Elado: Kaptam arut a raktarbol: csirke, 3 db.
+Elado: Kaptam arut a raktarbol: coca cola, 10 db.
+Elado: Kaptam arut a raktarbol: tonic, 20 db.
+Elado: Kaptam arut a raktarbol: sprite, 5 db.
+Elado: Kaptam arut a raktarbol: fanta, 9 db.
+Elado: Kaptam arut a raktarbol: tonic, 10 db.
+Idozito: Eltelt 1 perc.
+Busy: Varok, hogy elso legyek a sorban.
+Busy: En kovetkezem. Ha az elado figyelne, rendelhetnek.
+Elado: Elado pakol a bufeben 1 percig.
+Idozito: Eltelt 1 perc.
+Busy: Rendelhetek.
+Muca: Beleptem. Keresem a sort.
+Elado: Busy rendelt 2 darab sprite-t.
+Elado: Van raktaron, tessek.
+Idozito: Eltelt 1 perc.
+Z1: Beleptem. Keresem a sort.
+Muca: Varok, hogy elso legyek a sorban.
+Elado: Busy rendelt 2 darab coca cola-t.
+Elado: Van raktaron, tessek.
+Idozito: Eltelt 1 perc.
+Z2: Beleptem. Keresem a sort.
+Z1: Varok, hogy elso legyek a sorban.
+Elado: Busy rendelt 3 darab pizza-t.
+Elado: Sajnos a pizza elfogyott.
+Idozito: Eltelt 1 perc.
+Busy: Nem akarok tobbet rendelni.
+Elado: Kaptam arut a raktarbol: csirke, 2 db.
+Matyi: Beleptem. Keresem a sort.
+Elado: Rendben, irom a szamlat. 190 forint lesz.
+Idozito: Eltelt 1 perc.
+Busy: Tessek, 190 forint.
+Z2: Varok, hogy elso legyek a sorban.
+Matyi: Varok, hogy elso legyek a sorban.
+Elado: Rendben.
+Busy: Koszonom.
+Busy: Keresek egy ures helyet a bufeben.
+Muca: En kovetkezem. Ha az elado figyelne, rendelhetnek.
+Elado: Elado pakol a bufeben 2 percig.
+Idozito: Eltelt 1 perc.
+Busy: Elkezdtem enni, inni.
+Idozito: Eltelt 1 perc.
+Muca: Rendelhetek.
+Elado: Muca rendelt 1 darab coca cola-t.
+Elado: Van raktaron, tessek.
+Idozito: Eltelt 1 perc.
+Orsi: Beleptem. Keresem a sort.
+Elado: Muca rendelt 1 darab tonic-t.
+Elado: Van raktaron, tessek.
+Idozito: Eltelt 1 perc.
+Dori: Beleptem. Keresem a sort.
+Orsi: Varok, hogy elso legyek a sorban.
+Elado: Muca rendelt 3 darab hamburger-t.
+Elado: Van raktaron, tessek.
+Idozito: Eltelt 1 perc.
+Muca: Nem akarok tobbet rendelni.
+Susu: Beleptem. Keresem a sort.
+Dori: Varok, hogy elso legyek a sorban.
+Elado: Rendben, irom a szamlat. 500 forint lesz.
+Idozito: Eltelt 1 perc.
+Muca: Tessek, 500 forint.
+Susu: Varok, hogy elso legyek a sorban.
+Elado: Rendben.
+Muca: Koszonom.
+Muca: Keresek egy ures helyet a bufeben.
+Z1: En kovetkezem. Ha az elado figyelne, rendelhetnek.
+Elado: Elado pakol a bufeben 2 percig.
+Idozito: Eltelt 1 perc.
+Idozito: Eltelt 1 perc.
+Z1: Rendelhetek.
+Elado: Z1 rendelt 1 darab csirke-t.
+Elado: Van raktaron, tessek.
+Idozito: Eltelt 1 perc.
+Muca: Elkezdtem enni, inni.
+Elado: Z1 rendelt 2 darab coca cola-t.
+Elado: Van raktaron, tessek.
+Idozito: Eltelt 1 perc.
+Elado: Z1 rendelt 1 darab hamburger-t.
+Elado: Sajnos a hamburger elfogyott.
+Idozito: Eltelt 1 perc.
+Elado: Z1 rendelt 2 darab tonic-t.
+Elado: Van raktaron, tessek.
+Idozito: Eltelt 1 perc.
+Z1: Nem akarok tobbet rendelni.
+Elado: Rendben, irom a szamlat. 380 forint lesz.
+Idozito: Eltelt 1 perc.
+Z1: Tessek, 380 forint.
+Elado: Rendben.
+Z1: Koszonom.
+Z1: Keresek egy ures helyet a bufeben.
+Z2: En kovetkezem. Ha az elado figyelne, rendelhetnek.
+Elado: Elado pakol a bufeben 1 percig.
+Idozito: Eltelt 1 perc.
+Muca: Kilepek a bufebol.
+Z2: Rendelhetek.
+Elado: Z2 rendelt 1 darab pizza-t.
+Elado: Sajnos a pizza elfogyott.
+Idozito: Eltelt 1 perc.
+Busy: Kilepek a bufebol.
+Z1: Elkezdtem enni, inni.
+Z2: Nem akarok tobbet rendelni.
+Elado: Sajnalom, hogy semmit nem tudott venni.
+Idozito: Eltelt 1 perc.
+Z2: Koszonom.
+Matyi: En kovetkezem. Ha az elado figyelne, rendelhetnek.
+Elado: Elado pakol a bufeben 2 percig.
+Idozito: Eltelt 1 perc.
+Z2: Kilepek a bufebol.
+Idozito: Eltelt 1 perc.
+Matyi: Rendelhetek.
+Elado: Matyi rendelt 1 darab tonic-t.
+Elado: Van raktaron, tessek.
+Idozito: Eltelt 1 perc.
+Elado: Matyi rendelt 2 darab coca cola-t.
+Elado: Van raktaron, tessek.
+Idozito: Eltelt 1 perc.
+Matyi: Nem akarok tobbet rendelni.
+Elado: Rendben, irom a szamlat. 160 forint lesz.
+Idozito: Eltelt 1 perc.
+Matyi: Tessek, 160 forint.
+Elado: Rendben.
+Matyi: Koszonom.
+Matyi: Keresek egy ures helyet a bufeben.
+Orsi: En kovetkezem. Ha az elado figyelne, rendelhetnek.
+Idozito: Eltelt 1 perc.
+Orsi: Rendelhetek.
+Elado: Orsi rendelt 1 darab hamburger-t.
+Elado: Sajnos a hamburger elfogyott.
+Idozito: Eltelt 1 perc.
+Matyi: Elkezdtem enni, inni.
+Orsi: Nem akarok tobbet rendelni.
+Elado: Sajnalom, hogy semmit nem tudott venni.
+Idozito: Eltelt 1 perc.
+Orsi: Koszonom.
+Dori: En kovetkezem. Ha az elado figyelne, rendelhetnek.
+Idozito: Eltelt 1 perc.
+Z1: Kilepek a bufebol.
+Orsi: Kilepek a bufebol.
+Dori: Rendelhetek.
+Elado: Dori rendelt 3 darab sprite-t.
+Elado: Van raktaron, tessek.
+Idozito: Eltelt 1 perc.
+Elado: Dori rendelt 2 darab csirke-t.
+Elado: Van raktaron, tessek.
+Idozito: Eltelt 1 perc.
+Dori: Nem akarok tobbet rendelni.
+Elado: Rendben, irom a szamlat. 455 forint lesz.
+Idozito: Eltelt 1 perc.
+Dori: Tessek, 455 forint.
+Elado: Rendben.
+Dori: Koszonom.
+Dori: Keresek egy ures helyet a bufeben.
+Susu: En kovetkezem. Ha az elado figyelne, rendelhetnek.
+Idozito: Eltelt 1 perc.
+Susu: Rendelhetek.
+Elado: Susu rendelt 1 darab pizza-t.
+Elado: Sajnos a pizza elfogyott.
+Idozito: Eltelt 1 perc.
+Dori: Elkezdtem enni, inni.
+Elado: Susu rendelt 1 darab hamburger-t.
+Elado: Sajnos a hamburger elfogyott.
+Idozito: Eltelt 1 perc.
+Matyi: Kilepek a bufebol.
+Susu: Nem akarok tobbet rendelni.
+Elado: Sajnalom, hogy semmit nem tudott venni.
+Idozito: Eltelt 1 perc.
+Susu: Koszonom.
+Idozito: Eltelt 1 perc.
+Susu: Kilepek a bufebol.
+Idozito: Eltelt 1 perc.
+Idozito: Eltelt 1 perc.
+Idozito: Eltelt 1 perc.
+Idozito: Eltelt 1 perc.
+Idozito: Eltelt 1 perc.
+Idozito: Eltelt 1 perc.
+Idozito: Eltelt 1 perc.
+Idozito: Eltelt 1 perc.
+Idozito: Eltelt 1 perc.
+Idozito: Eltelt 1 perc.
+Idozito: Eltelt 1 perc.
+Idozito: Eltelt 1 perc.
+Dori: Kilepek a bufebol.

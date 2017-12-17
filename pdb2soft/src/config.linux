@@ -1,0 +1,5 @@
+
+CC = cc
+CFLAGS = -g -Wall -DDEBUG
+LD_LIBS = -lm
+

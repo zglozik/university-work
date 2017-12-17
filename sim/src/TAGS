@@ -1,0 +1,608 @@
+
+body.cc,636
+Body::Body(4,21
+Body::Body(11,252
+Body::Body(18,382
+Body::~Body(25,556
+const Body &Body::draw(47,882
+Body &Body::move(59,1126
+Body &Body::move_rel(71,1373
+Point Body::centre_of_gravity(76,1498
+double Body::J(91,1818
+double Body::weight(103,2073
+Body &Body::rotate(115,2268
+Body &Body::bend(128,2618
+double Body::alpha(137,2839
+Body &Body::bend(156,3296
+Body &Body::bend_rel(192,4231
+Body::PartStore *Body::duplicate_parts(212,4785
+Body::WristStore *Body::duplicate_wrists(228,5298
+int Body::point_index(248,6039
+void Body::walk_body(255,6246
+List<Point *> Body::neighbours(267,6534
+bool Body::is_connected(283,6858
+
+bodybuilder.cc,326
+BodyBuilder::BodyBuilder(8,210
+BodyBuilder::~BodyBuilder(22,570
+bool BodyBuilder::add_part(35,899
+bool BodyBuilder::add_wrist(52,1426
+Point &BodyBuilder::endpoint(114,3181
+void BodyBuilder::push_tpart(132,3592
+bool BodyBuilder::init_wrist(155,4217
+bool BodyBuilder::init(182,4930
+Body *BodyBuilder::operator 214,5841
+
+expression.cc,0
+
+god.cc,388
+God::God(10,237
+void God::time_elapsed(20,583
+void God::metamorphose(34,971
+void God::balance(51,1476
+void God::move(84,2375
+void God::rotate(109,3086
+double God::get_w(150,4115
+double God::get_w(179,4995
+int God::get_axis(198,5442
+void God::avoid_clash(234,6409
+bool God::avoid_clash_rotate(262,7241
+void God::fix_axis_position(289,8006
+const Point God::axis_point(300,8277
+
+land.cc,138
+const Land &Land::draw(4,21
+bool Land::inside(12,158
+bool Land::is_surface(17,238
+Point Land::normal(22,323
+Point Land::depth(29,431
+
+lex.yy.cc,3253
+#define FLEX_SCANNER7,163
+#define YY_FLEX_MAJOR_VERSION 8,184
+#define YY_FLEX_MINOR_VERSION 9,216
+#define __cplusplus17,371
+#define YY_USE_PROTOS28,515
+#define YY_USE_CONST31,589
+#define YY_USE_PROTOS37,652
+#define YY_USE_CONST38,674
+#define YY_USE_CONST48,838
+#define YY_USE_PROTOS49,859
+#define yyconst 53,909
+#define yyconst55,937
+#define YY_PROTO(YY_PROTO60,983
+#define YY_PROTO(YY_PROTO62,1019
+#define YY_NULL 66,1087
+#define YY_SC_TO_UI(YY_SC_TO_UI73,1334
+#define BEGIN 79,1565
+#define YY_START 85,1762
+#define YYSTATE 86,1800
+#define YY_STATE_EOF(YY_STATE_EOF89,1883
+#define YY_NEW_FILE 92,2003
+#define YY_END_OF_BUFFER_CHAR 94,2042
+#define YY_BUF_SIZE 97,2111
+typedef struct yy_buffer_state *YY_BUFFER_STATE;YY_BUFFER_STATE99,2138
+#define EOB_ACT_CONTINUE_SCAN 104,2235
+#define EOB_ACT_END_OF_FILE 105,2267
+#define EOB_ACT_LAST_MATCH 106,2297
+#define yyless(yyless124,2871
+#define unput(unput135,3126
+typedef unsigned int yy_size_t;yy_size_t141,3364
+struct yy_buffer_stateyy_buffer_state144,3398
+#define YY_BUFFER_NEW 186,4449
+#define YY_BUFFER_NORMAL 187,4473
+#define YY_BUFFER_EOF_PENDING 198,4971
+#define YY_CURRENT_BUFFER 207,5204
+#define YY_FLUSH_BUFFER 236,6198
+#define yy_new_buffer 246,6634
+#define yy_set_interactive(yy_set_interactive248,6674
+#define yy_set_bol(yy_set_bol255,6879
+#define YY_AT_BOL(YY_AT_BOL262,7052
+typedef unsigned char YY_CHAR;YY_CHAR264,7104
+typedef int yy_state_type;yy_state_type266,7181
+#define yytext_ptr 268,7229
+#define YY_DO_BEFORE_ACTION 278,7624
+#define YY_NUM_RULES 285,7778
+#define YY_END_OF_BUFFER 286,7802
+#define REJECT 402,13341
+#define yymore(yymore403,13385
+#define YY_MORE_ADJ 404,13431
+#define YY_RESTORE_YY_MORE_OFFSET405,13453
+#define INITIAL 408,13520
+#define YY_NO_PUSH_STATE 464,14648
+#define YY_NO_POP_STATE 465,14675
+#define YY_NO_TOP_STATE 466,14701
+#define YY_READ_BUF_SIZE 486,15117
+#define ECHO 495,15336
+#define YY_INPUT(YY_INPUT502,15528
+#define yyterminate(yyterminate525,16298
+#define YY_START_STACK_INCR 530,16433
+#define YY_FATAL_ERROR(YY_FATAL_ERROR535,16523
+#define YY_DECL 542,16698
+#define YY_USER_ACTION549,16871
+#define YY_BREAK 554,16964
+#define YY_RULE_SETUP 557,16996
+static int yy_get_next_buffer(901,24193
+static yy_state_type yy_get_previous_state(1031,27236
+static yy_state_type yy_try_NUL_trans(1066,28139
+static void yyunput(1096,28941
+static int yyinput(1139,29965
+void yyrestart(1208,31301
+void yy_switch_to_buffer(1223,31590
+void yy_load_buffer_state(1253,32320
+YY_BUFFER_STATE yy_create_buffer(1266,32598
+void yy_delete_buffer(1297,33313
+void yy_init_buffer(1323,33752
+void yy_flush_buffer(1350,34182
+YY_BUFFER_STATE yy_scan_buffer(1378,34756
+YY_BUFFER_STATE yy_scan_string(1416,35641
+YY_BUFFER_STATE yy_scan_bytes(1433,35908
+static void yy_push_state(1472,36702
+static void yy_pop_state(1505,37379
+static int yy_top_state(1516,37578
+#define YY_EXIT_FAILURE 1523,37690
+static void yy_fatal_error(1527,37745
+#define yyless(yyless1542,37998
+static void yy_flex_strncpy(1559,38306
+static int yy_flex_strlen(1575,38578
+static void *yy_flex_alloc(1591,38779
+static void *yy_flex_realloc(1601,38949
+static void yy_flex_free(1619,39520
+int main(1629,39647
+
+numanal.cc,85
+extern double find_intersection(11,310
+extern Point find_line_intersection(53,1393
+
+si_viewer.cc,169
+Viewer::Viewer(10,209
+Viewer::~Viewer(14,257
+Viewer &Viewer::begin(18,280
+Viewer &Viewer::end(25,347
+Viewer &Viewer::move_to(35,466
+Viewer &Viewer::line_to(46,600
+
+simulator.cc,395
+#define	TIME_SLICE	7,85
+Simulator::Simulator(13,299
+void Simulator::run(78,1623
+void Simulator::init_play(130,2876
+bool Simulator::play(142,3299
+double Simulator::last_t(183,4446
+void Simulator::add_to_route(199,4900
+void Simulator::draw_route(211,5275
+void Simulator::write_state(227,5773
+bool Simulator::read_metamorphoses(249,6463
+void Simulator::sleep(275,7145
+int main(285,7360
+
+string.cc,93
+String::String(28,458
+String::String(34,561
+String::String(42,681
+String::~String(50,812
+
+test.cc,0
+
+wristmotion.cc,1170
+typedef	Hermite<double>	Spline;Spline4,28
+struct Segment Segment10,222
+	Segment(Segment::Segment12,263
+struct ConstantSegment ConstantSegment27,672
+	ConstantSegment(ConstantSegment::ConstantSegment28,714
+	bool evaluate(ConstantSegment::evaluate30,816
+struct SplineSegment SplineSegment43,1094
+	SplineSegment(SplineSegment::SplineSegment44,1134
+	virtual ~SplineSegment(SplineSegment::~SplineSegment46,1238
+	bool evaluate(SplineSegment::evaluate47,1283
+struct ExpressionSegment ExpressionSegment60,1578
+	ExpressionSegment(ExpressionSegment::ExpressionSegment61,1622
+	virtual ~ExpressionSegment(ExpressionSegment::~ExpressionSegment64,1758
+	bool evaluate(ExpressionSegment::evaluate65,1811
+WristMotion::WristMotion(79,2144
+WristMotion::~WristMotion(87,2357
+void WristMotion::start(96,2582
+bool WristMotion::add_point(108,2887
+bool WristMotion::add_range(131,3446
+bool WristMotion::make_spline(175,4662
+bool WristMotion::make_constant(208,5699
+bool WristMotion::make_expression(226,6193
+bool WristMotion::end(240,6562
+bool WristMotion::evaluate(267,7332
+double WristMotion::last_t(284,7813
+void WristMotion::destroy_segments(295,8095
+
+x_viewer.cc,205
+Viewer::Viewer(10,209
+Viewer::~Viewer(18,344
+Viewer	&Viewer::init_frames(23,386
+Viewer	&Viewer::begin(31,520
+Viewer	&Viewer::end(38,596
+Viewer &Viewer::move_to(46,687
+Viewer &Viewer::line_to(54,846
+
+y.tab.cc,1316
+#define YYBYACC 4,84
+#define YYMAJOR 5,102
+#define YYMINOR 6,120
+#define yyclearin 7,138
+#define yyerrok 8,170
+#define YYRECOVERING 9,200
+#define YYPREFIX 10,236
+} YYSTYPE;YYSTYPE53,1323
+#define BODY 55,1353
+#define PARTS 56,1370
+#define WRISTS 57,1388
+#define INIT 58,1407
+#define PROGRAM 59,1424
+#define FIXED 60,1444
+#define START 61,1462
+#define END 62,1480
+#define SQRT 63,1496
+#define SIN 64,1513
+#define COS 65,1529
+#define TAN 66,1545
+#define EXP 67,1561
+#define NUMBER 68,1577
+#define ID 69,1596
+#define UNARYPLUS 70,1611
+#define UNARYMINUS 71,1633
+#define YYERRCODE 72,1656
+#define YYTABLESIZE 134,4771
+#define YYFINAL 201,8645
+#define YYDEBUG 203,8679
+#define YYMAXTOKEN 205,8704
+#define YYMAXDEPTH 265,10835
+#define YYSTACKSIZE 268,10890
+#define YYSTACKSIZE 270,10927
+#define YYMAXDEPTH 271,10951
+#define yystacksize 284,11154
+static void gc_push(292,11444
+static bool init_wrists(308,11988
+static bool check_bound(332,12658
+static bool add_section(346,13033
+static bool make_point(381,13924
+static bool evaluate(396,14345
+static inline SymbolTable &symbol_table(411,14735
+void yyerror(422,15109
+extern bool parse_input(427,15195
+#define YYABORT 509,16998
+#define YYREJECT 510,17027
+#define YYACCEPT 511,17057
+#define YYERROR 512,17088
+yyparse(514,17122
+
+../include/angles.hh,83
+#define	_ANGLES_HH_3,21
+inline double rad2deg(7,61
+inline double deg2rad(12,126
+
+../include/array.hh,69
+#define	_ARRAY_HH_3,20
+class Array Array8,84
+	Array(Array19,207
+
+../include/body.hh,111
+#define	_BODY_HH_3,19
+typedef	Vector<double>		Point;Point14,203
+class Body Body18,255
+	Body(Body78,1409
+
+../include/bodybuilder.hh,189
+#define	_BODY_BUILDER_HH_3,27
+class BodyBuilder BodyBuilder7,74
+	const char *error(BodyBuilder::error39,756
+	struct TPart BodyBuilder::TPart45,831
+	char	error_str[error_str70,1417
+
+../include/bodyspec.hh,154
+#define	_BODYSPEC_HH_3,23
+#define	MAX_ID_LEN	9,124
+struct Boundaries Boundaries11,147
+struct PartPoint PartPoint16,201
+struct _Point _Point21,283
+
+../include/btree.hh,83
+#define	_BTREE_HH_3,20
+class BTree BTree10,166
+	class iterator iterator47,769
+
+../include/debug.hh,242
+#define	DEBUG_HH3,18
+typedef	int	bool;bool10,94
+#define	true	12,113
+#define	false	13,128
+#define	ERROR(ERROR17,166
+#define	LOG(LOG26,341
+#define	TEST_EXPR(TEST_EXPR30,467
+#define	LOG(LOG34,516
+#define	TEST_EXPR(TEST_EXPR35,536
+
+../include/expression.hh,2187
+#define	_EXPRESSION_HH_3,25
+typedef	Map<String, double>	SymbolTable;SymbolTable15,312
+class Expression Expression21,517
+class Variable Variable34,770
+	Variable(Variable::Variable37,820
+	bool evaluate(Variable::evaluate39,882
+class Number Number53,1158
+	Number(Number::Number56,1206
+	bool evaluate(Number::evaluate58,1253
+struct BinaryExpression BinaryExpression72,1530
+	BinaryExpression(BinaryExpression::BinaryExpression79,1710
+virtual	~BinaryExpression(BinaryExpression::~BinaryExpression84,1856
+	bool evaluate(BinaryExpression::evaluate90,1925
+struct UnaryExpression UnaryExpression113,2435
+	UnaryExpression(UnaryExpression::UnaryExpression120,2610
+virtual	~UnaryExpression(UnaryExpression::~UnaryExpression124,2699
+	bool evaluate(UnaryExpression::evaluate129,2750
+struct Addition Addition152,3187
+	Addition(Addition::Addition154,3232
+	bool evaluate(Addition::evaluate157,3327
+struct Subtraction Subtraction164,3427
+	Subtraction(Subtraction::Subtraction166,3475
+	bool evaluate(Subtraction::evaluate169,3573
+struct Division Division176,3673
+	Division(Division::Division178,3718
+	bool evaluate(Division::evaluate181,3813
+struct Multiplication Multiplication191,3955
+	Multiplication(Multiplication::Multiplication193,4006
+	bool evaluate(Multiplication::evaluate196,4107
+struct Power Power203,4207
+	Power(Power::Power205,4249
+	bool evaluate(Power::evaluate208,4341
+struct UnaryPlus UnaryPlus220,4630
+	UnaryPlus(UnaryPlus::UnaryPlus222,4675
+	bool evaluate(UnaryPlus::evaluate224,4737
+struct UnaryMinus UnaryMinus231,4821
+	UnaryMinus(UnaryMinus::UnaryMinus233,4867
+	bool evaluate(UnaryMinus::evaluate235,4930
+struct Exp Exp242,5015
+	Exp(Exp::Exp244,5054
+	bool evaluate(Exp::evaluate246,5110
+struct Tangent Tangent253,5201
+	Tangent(Tangent::Tangent255,5244
+	bool evaluate(Tangent::evaluate257,5304
+struct Cosinus Cosinus265,5410
+	Cosinus(Cosinus::Cosinus267,5453
+	bool evaluate(Cosinus::evaluate269,5513
+struct Sinus Sinus276,5604
+	Sinus(Sinus::Sinus278,5645
+	bool evaluate(Sinus::evaluate280,5703
+struct Sqrt Sqrt287,5794
+	Sqrt(Sqrt::Sqrt289,5834
+	bool evaluate(Sqrt::evaluate291,5891
+
+../include/funcs.hh,1430
+#define	_FUNCS_HH_3,20
+#define	DOUBLE_PRECISION	7,63
+inline ELEM square(10,121
+inline double abs(15,186
+inline bool equal(20,245
+inline bool less(25,345
+inline Container &empty(37,556
+inline It2 copy(44,693
+inline It1 find_if(52,838
+inline It1 find(60,1001
+inline It1 find_ref(68,1164
+inline Output transform(76,1347
+inline const T max(84,1517
+inline const T &min(90,1610
+class insert_iterator insert_iterator96,1712
+	insert_iterator(insert_iterator::insert_iterator98,1748
+	insert_iterator	operator insert_iterator::operator105,1906
+class back_insert_iterator back_insert_iterator113,2120
+	back_insert_iterator(back_insert_iterator::back_insert_iterator115,2161
+	back_insert_iterator	operator back_insert_iterator::operator122,2332
+class ostream_iterator ostream_iterator130,2554
+	ostream_iterator(ostream_iterator::ostream_iterator133,2592
+	ostream_iterator(ostream_iterator::ostream_iterator134,2654
+	ostream_iterator operator ostream_iterator::operator141,2852
+struct binary_operation binary_operation150,3106
+virtual	return_type operator(operator155,3216
+struct unary_operation unary_operation160,3343
+virtual	return_type operator(operator164,3424
+struct identity identity168,3516
+	ELEM &operator identity::operator169,3575
+struct is_less is_less173,3666
+	bool	operator(is_less::operator174,3729
+struct is_equal is_equal181,3833
+	bool	operator(is_equal::operator182,3897
+
+../include/god.hh,59
+#define	_GOD_HH_3,18
+class God God8,75
+	God(God28,421
+
+../include/hermite.hh,80
+#define	_HERMITE_HH_3,22
+class Hermite Hermite9,109
+	Hermite(Hermite30,448
+
+../include/land.hh,151
+#define	_LAND_HH_3,19
+typedef	Vector<double>	Point;Point9,101
+class Land Land11,132
+	Land(Land::Land16,175
+	const Land &draw(Land::draw24,298
+
+../include/list.hh,71
+#define	_LIST_HH_3,19
+class List List8,82
+	struct Node Node16,173
+
+../include/map.hh,75
+#define	_MAP_HH_3,18
+class Map Map8,91
+	class iterator iterator38,539
+
+../include/numanal.hh,67
+#define	_NUMANAL_HH_3,22
+typedef	Vector<double>	Point;Point7,66
+
+../include/pair.hh,106
+#define	_PAIR_HH_3,19
+struct Pair Pair9,110
+	Pair(Pair13,175
+inline Pair< T1, T2 > make_pair(28,458
+
+../include/simulator.hh,86
+#define	_SIMULATOR_HH_3,24
+class Simulator Simulator7,72
+	bool	route;route47,956
+
+../include/string.hh,80
+#define	_STRING_HH_3,21
+class String String7,63
+	int	len(String::len27,509
+
+../include/transform.hh,114
+#define	_TRANSFORM_HH_3,24
+class Transform Transform9,113
+	Vector<ELEM>	transform(Transform::transform21,377
+
+../include/vector.hh,149
+#define	_VECTOR_HH_7,54
+class Vector Vector15,179
+	Vector(Vector::Vector32,1007
+	Vector(Vector::Vector33,1021
+	Vector(Vector::Vector34,1085
+
+../include/viewer.hh,423
+#define	_VIEWER_HH_3,21
+typedef	Vector<double>	Point;Point9,103
+class Viewer Viewer17,193
+	void	set_width(Viewer::set_width36,482
+	Viewer	&init_frames(Viewer::init_frames40,554
+	Viewer	&move_to(Viewer::move_to41,600
+	Viewer	&line_to(Viewer::line_to46,730
+class Viewer Viewer62,974
+	void	set_width(Viewer::set_width81,1263
+	Viewer	&move_to(Viewer::move_to83,1328
+	Viewer	&line_to(Viewer::line_to88,1458
+
+../include/wristmotion.hh,155
+#define	_WRIST_MOTION_HH_3,27
+class WristMotion WristMotion11,136
+	SymbolTable &symbol_table(WristMotion::symbol_table33,539
+	bool		done;done52,962
+
+../include/array.cc,158
+Array<ELEM>::Array(5,45
+Array<ELEM>::Array(14,293
+Array<ELEM>::~Array(23,552
+Array<ELEM> &Array<ELEM>::push_back(45,963
+void Array<ELEM>::resize(58,1207
+
+../include/btree.cc,227
+inline BTree < KEY,ELEM,KeyOfElem,Compare>::BTree(7,227
+inline BTree<KEY,ELEM,KeyOfElem,Compare>::BTree(17,574
+inline BTree<KEY,ELEM,KeyOfElem,Compare>::~BTree(28,985
+bool BTree<KEY,ELEM,KeyOfElem,Compare>::destroy(56,1850
+
+../include/hermite.cc,126
+POINT Hermite<POINT>::operator 13,179
+void Hermite<POINT>::update_dpoints(41,873
+inline POINT Hermite<POINT>::diff(73,1577
+
+../include/list.cc,159
+List<ELEM>::List(5,45
+List<ELEM>::List(13,188
+List<ELEM>::~List(23,420
+List<ELEM> &List<ELEM>::push_front(40,757
+List<ELEM> &List<ELEM>::push_back(46,873
+
+../include/map.cc,36
+bool Map<KEY,ELEM>::destroy(15,241
+
+../include/transform.cc,313
+Transform<ELEM>::Transform(7,66
+Vector<ELEM> Transform<ELEM>::transform(17,221
+Transform<ELEM> &Transform<ELEM>::set(34,501
+Transform<ELEM> &Transform<ELEM>::rotate(46,704
+Transform<ELEM> &Transform<ELEM>::transfer(96,1644
+Transform<ELEM> &Transform<ELEM>::scale(115,1978
+Transform<ELEM> operator 132,2269
+
+../include/vector.cc,229
+ELEM operator 47,1002
+Vector<ELEM> operator*53,1131
+inline Vector<ELEM> operator*59,1267
+Vector<ELEM> vector_mul(71,1523
+inline double abs(78,1695
+double cos_alpha(84,1789
+double alpha(92,2001
+Vector<ELEM> normal(99,2189
+
+../include/xviewer.cc,298
+class Application Application4,23
+	Widget	base(Application::base15,155
+Application::Application(29,487
+Application::~Application(36,662
+void Application::main_loop(41,728
+XViewer::XViewer(50,970
+XViewer::~XViewer(55,1013
+Viewer &XViewer::move_to(60,1066
+Viewer &XViewer::line_to(66,1144
+
+matrix.c,531
+extern Matrix *mtrxCreate(12,279
+extern Matrix *mtrxCopy(28,621
+extern void mtrxFree(37,866
+extern double mtrxGetValue(46,1107
+extern Matrix *mtrxSetValue(55,1399
+extern Matrix *mtrxMulRight(65,1701
+extern Matrix *mtrxMulLeft(89,2298
+extern Matrix *mtrxMulScalar(113,2901
+extern DK_Vector *mtrxMulVector(130,3316
+extern Matrix *mtrxIdentity(153,3862
+extern Matrix *mtrxSetIdentity(168,4205
+extern Matrix *mtrxScale(184,4619
+extern Matrix *mtrxTransfer(207,5134
+extern Matrix *mtrxRotate(230,5661
+void print(285,6570
+
+model.c,339
+#define	SQR(SQR10,129
+#define	LENGTH(LENGTH11,156
+#define	MAX_MATRIX	12,211
+struct _Model _Model14,235
+static DK_Material *GetMaterial(41,878
+static double Angle(71,1842
+extern Model mdlCreate(93,2389
+extern void mdlSave(132,3376
+extern void mdlFree(143,3653
+extern void mdlAddSphere(156,3963
+extern void mdlAddRoll(187,4731
+
+roll.c,539
+struct _Model _Model10,136
+#define SQR(SQR17,194
+#define LENGTH(LENGTH18,236
+static int MakeCircle(39,1220
+static void MakeVertices(79,2088
+static void MakeCylinderTriangles(114,3142
+static void MakeRectangles(150,4004
+static void MakePolygons(181,4718
+static void TransformVertices(220,5922
+extern DK_Model *CreateRoll(234,6341
+static DK_Material *GetMaterial(267,7214
+static double Angle(297,8178
+extern Model mdlCreate(319,8675
+extern int mdlSave(338,9093
+extern void mdlFree(347,9356
+extern void mdlAddRoll(358,9660
+
+xviewer.c,350
+#define	SCALEX(SCALEX10,154
+#define	SCALEZ(SCALEZ11,203
+} Pipe;Pipe17,311
+} Viewer;Viewer29,476
+static void pipe_open(31,487
+static Boolean pipe_read(37,564
+static void viewer_init(68,1154
+static Pixmap change_pixmap(93,1778
+static void expose_cb(123,2526
+static void resize_cb(135,2832
+static void read_cb(144,3017
+int main(190,4515

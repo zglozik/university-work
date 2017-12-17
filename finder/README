@@ -1,0 +1,49 @@
+
+finder
+~~~~~~
+
+hasznalata: finder minta <file-ok>
+
+A program kiirja a standard output-ra a minta-ra illeszkedo file-ok nevet.
+Ha a minta nem megfelelo kifejezes, akkor hibakoddal ter vissza.
+
+A minta szintakszisa a kovetkezo:
+
+minta:= '(' <minta> ')' | <minta_elem1> '|' <minta> | <minta_elem1>
+
+minta_elem1:= <minta_elem2> '&' <minta_elem1> | <minta_elem2> <minta_elem1> |
+	<minta_elem2>
+
+minta_elem2:= '!' <reg_kif> | <reg_kif> 
+
+reg_kif:= <elem> <reg_kif> | <elem> '*' <reg_kif> | <elem> '+' <reg_kif> |
+	<elem> '?' <reg_kif> | 
+
+<elem>:= <karakter> | '[' <kar_sorozat> ']' | '[^' <kar_sorozat> ']' |
+	'\(' <elem> '\)'
+
+<kar_sorozat>:= <karakter> | <karakter><kar_sorozat>
+
+Ha a mintaelemek koze nem kerul operator, akkor a '&' jelet feltetelezi a 
+program. A szokoz karaktereknek csak elhatarolo szerepuk van a mintaban.
+Specialis jelek:
+
+.: minden karakterre illeszkedik
+^: sor elejere illeszkedik
+$: sor vegere illeszkedik
+\<karakter>: a karaktert a minta reszenek tekinti, 
+	elnyomja a specialis jelenteset
+
+
+Nehany pelda:
+
+alma korte	-> az "alma" es a "korte" szot tartalmazo file-ok
+alma & korte	-> = elozo
+korte | [^\ ][^\ ]*fa	-> a file-ban vagy a korte szerepel vagy van benne 
+			"fa"-ra vegzodo szo.
+(korte & alma) | !(korte | alma)	-> csak azok a file-ok, amelyekben vagy
+					mindket szo, vagy egyik sem fordul elo
+(korte & alma) | (!korte & !alma)	-> = elozo
+\(korte\)+\ *alma	-> legalabb egyszer elofordul egy sorban a "korte" az 
+			"alma" elott, koztuk lehetnek szokozok
+

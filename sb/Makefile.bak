@@ -1,0 +1,39 @@
+
+CXXFLAGS = -Wall -DDEBUG -g
+LDFLAGS =
+
+SOURCES = main.cc Person.cc Manager.cc Timer.cc Object.cc Assistant.cc\
+	WaitingQueue.cc Store.cc random.cc
+
+OBJECTS = $(SOURCES:.cc=.o)
+
+sb: $(OBJECTS)
+	$(CXX) -o sb $(OBJECTS) $(LDFLAGS)
+
+backup:
+	cd ..; tar cf sb.tar sb/*.cc sb/*.h sb/Makefile
+
+clean:
+	rm *.o sb *~ \#* core
+
+depend:
+	makedepend -Y $(SOURCES)
+
+# DO NOT DELETE
+
+main.o: stdtypes.h debug.h sb.h Object.h Timer.h Manager.h WaitingQueue.h
+main.o: Assistant.h Store.h
+Person.o: Person.h Object.h debug.h sb.h Timer.h stdtypes.h Manager.h
+Person.o: WaitingQueue.h Assistant.h Store.h random.h
+Manager.o: Manager.h Object.h debug.h Person.h sb.h Timer.h stdtypes.h
+Manager.o: WaitingQueue.h Assistant.h Store.h random.h
+Timer.o: debug.h Timer.h stdtypes.h Object.h sb.h Manager.h WaitingQueue.h
+Timer.o: Assistant.h Store.h
+Object.o: Object.h debug.h
+Assistant.o: Assistant.h stdtypes.h debug.h Object.h Person.h Timer.h
+Assistant.o: random.h sb.h Manager.h WaitingQueue.h Store.h
+WaitingQueue.o: WaitingQueue.h stdtypes.h debug.h Object.h Person.h sb.h
+WaitingQueue.o: Timer.h Manager.h Assistant.h Store.h
+Store.o: Store.h stdtypes.h debug.h Object.h Timer.h sb.h Manager.h
+Store.o: WaitingQueue.h Assistant.h
+random.o: random.h

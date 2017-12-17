@@ -1,0 +1,16 @@
+
+CFLAGS = -Wall -g
+
+SOURCES = finder.c pattern.c
+
+OBJECTS = $(SOURCES:.c=.o)
+
+finder: $(OBJECTS)
+
+depend:
+	makedepend -Y $(SOURCES)
+
+# DO NOT DELETE
+
+finder.o: finder.h stdtypes.h
+pattern.o: finder.h stdtypes.h pattern.h

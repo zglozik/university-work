@@ -1,0 +1,108 @@
+
+LOGO program
+~~~~~~~~~~~~
+
+	Az elkeszült program egy egyszerû LOGO interpreter, a paraméterként
+kapott állományból olvassa be a parancsokat és egy X-Window ablakban jeleníti
+meg az eredményt.
+
+Példa a használatára:
+	./logo primitive.lo
+
+A programot az augusta-n vagy a grafi-n le lehet fordítani, esetleg a
+Makefile-on kell egy kicsit módosítani, aztán lehet futtatni valamelyik
+X-terminálon.
+
+A LOGO nyelvtan a következô (a nagybetûvel írt szimbólumok a lexikális elemek,
+ezeket a forrásprogramban kisbetûvel kell írni, az interpreter érzékeny a
+kis-nagy betûkre):
+
+command_list:	
+	|	'\n' command_list
+	|	command '\n' command_list
+	|	function_def '\n' command_list
+
+command:	simple_command
+	|	WHILE expression '\n' command_list END
+	|	IF expression then_branch else_branch END
+
+function_def:	FUNCTION function_head '\n' command_list END
+
+simple_command:	function_call
+	|	assignment
+	|	turtle_command
+
+then_branch:	THEN '\n' command_list
+
+else_branch:
+	|	ELSE '\n' command_list
+
+function_head:	ID '(' fparameters ')'
+
+fparameters:
+	|	fparameters2
+
+fparameters2:	ID
+	|	ID ',' fparameters2
+		
+assignment:	variable ':' '=' expression
+
+variable:	ID
+
+expression:	NUMBER
+	|	variable
+	|	expression '+' expression
+	|	expression '-' expression
+	|	expression '*' expression
+	|	expression '/' expression
+	|	expression '%' expression
+	|	expression '=' expression
+	|	expression '<' expression
+	|	expression LE expression
+	|	expression '>' expression
+	|	expression GE expression
+	|	expression '&' expression
+	|	expression '|' expression
+	|	'(' expression ')'
+	|	'-' expression
+	|	'+' expression
+	|	function_call
+
+function_call:	ID '(' cparameters ')'
+	|	SIN '(' expression ')'
+	|	COS '(' expression ')'
+	|	TAN '(' expression ')'
+	|	ACOS '(' expression ')'
+	|	ATAN '(' expression ')'
+
+cparameters:
+	|	cparameters2
+
+cparameters2:	expression
+	|	cparameters2 ',' expression
+			
+turtle_command:	PRINT expression
+	|	FORWARD expression
+	|	BACKWARD expression
+	|	LEFT expression
+	|	RIGHT expression
+	|	PEN UP
+	|	PEN DOWN
+	|	DIRECTION expression
+	|	POSITION expression ',' expression
+
+A változókat nem kell használat elôtt deklarálni, minden változó lebegôpontos
+valós típusú, és akkor jön létre, mikor elôször szerepel értékadás bal
+oldalán. A függvények formális paraméterlistáiban szereplô változók a
+függvényre lokálisak, értéküket elvesztik a függvény végrehajtása után. A
+függvények visszatérési értékét a "ret" változóba kell betenni visszatérés
+elôtt. Ha valamelyik formális paraméter nevével megegyezô nevû globális változó
+létezik, akkor a függvény visszatérése után a globális változó értéke ugyanaz
+marad, ami a függvény meghívása elôtt volt, és a globális változó nem érhetô el
+a függvénybôl.
+
+Található néhány példaprogram a csomagban, ezek kiterjesztése: ".lo".
+
+
+				Készítette:
+					Glózik Zoltán <glozikz@ludens.elte.hu>

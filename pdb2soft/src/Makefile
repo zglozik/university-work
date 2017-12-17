@@ -1,0 +1,30 @@
+
+#include	config.linux
+include	config.sgi
+
+SOURCES = main.c stdtypes.c molecule.c model.c matrix.c roll.c sphere.c
+
+OBJECTS = $(SOURCES:.c=.o)
+
+pdb2soft: $(OBJECTS)
+	$(CC) -o $@ $(OBJECTS) $(LDFLAGS)
+	rcp $@ smallchaos:bin
+
+depend:
+	makedepend -Y $(SOURCES)
+
+clean:
+	rm *.o core pdb2soft *~
+
+backup:
+	cd ../..; tar cvf - pdb2soft | gzip -c > pdb2soft.tar.gz
+
+# DO NOT DELETE
+
+main.o: molecule.h stdtypes.h model.h
+stdtypes.o: stdtypes.h
+molecule.o: molecule.h stdtypes.h
+model.o: model.h molecule.h stdtypes.h matrix.h sphere.h roll.h
+matrix.o: matrix.h stdtypes.h
+roll.o: roll.h matrix.h
+sphere.o: sphere.h matrix.h

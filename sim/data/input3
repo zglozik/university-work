@@ -1,0 +1,35 @@
+
+BODY PARTS
+	ROUTE
+	shin:	0.6, 10, 0.5, NOROUTE
+	thigh:	0.7, 18, 2/3, NOROUTE
+	body:	1, 45, 3/4, NOROUTE
+
+WRISTS
+
+	knee:	shin.end, thigh.start, [ 0, 1, 0 ]
+	waist:	thigh.end, body.start, [ 0, -1, 0 ]
+
+PROGRAM
+
+knee:
+	0:	180;
+	0.7:	45;
+	0.9:	180;
+	1:	50;
+
+waist:
+	0:	180;
+	0.7:	90;
+	0.9:	180;
+	1:	55;
+
+INIT
+
+[ 0, 0, 0 ]
+shin.start: [ 0, 0, 0.0001 ], 90
+
+
+
+
+

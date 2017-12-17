@@ -1,0 +1,20 @@
+
+position 100, 200
+pen down
+a:=0
+while a < 20
+	forward 16
+	left 18
+	a:=a+1
+	if a % 2 = 0 then
+		right 90
+		forward 10
+		backward 10
+		left 90
+	else
+		left 90
+		forward 10
+		backward 10
+		right 90
+	end
+end

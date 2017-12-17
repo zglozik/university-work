@@ -1,0 +1,12 @@
+pen down
+position 100, 100
+a := 0
+while a < 4
+	b := 0
+	while b < 2
+		left 45
+		forward 30
+		b := b + 1
+	end
+	a := a + 1
+end

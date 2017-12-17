@@ -1,0 +1,36 @@
+
+BODY PARTS
+
+	NOROUTE
+	shin:	0.5, 5, 0.5, NOROUTE
+	thigh:	0.6, 15, 2/3, NOROUTE
+	body:	1, 45, 3/4, NOROUTE
+	peg:	0.15, 4, 1, NOROUTE
+
+WRISTS
+
+	knee:	shin.end, thigh.start, [ 0, 1, 0 ]
+	waist:	thigh.end, body.start, [ 0, -1, 0 ]
+	ankle:	peg.start, shin.start, [ 0, -1, 0 ]
+
+PROGRAM
+
+knee:
+	0: 134;
+#	0.05: 126.9;
+#	0.075: 178.7;
+
+waist:
+	0: 145;
+#	0.04: 139.2;
+#	0.05: 164.6;
+
+ankle:
+	0-0.05: 84 + 36*((t-0.05)/0.05)^2;
+#	0.05: 84;
+	0.205: 151.8;
+
+INIT
+
+[ 0, 0, -2 ]
+peg.end: [ 0, 0, 0 ], 130
